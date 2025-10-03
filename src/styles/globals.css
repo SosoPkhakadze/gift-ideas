@@ -1,9 +1,50 @@
-/* src/styles/globals.css */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Lato:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Lato:wght@300;400;700;900&display=swap');
 
-@import "tailwindcss/preflight";
-@import "tailwindcss/utilities";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-h1, h2, h3 {
-  font-family: 'Cinzel Decorative', cursive;
+:root {
+  --font-lato: 'Lato', sans-serif;
+  --font-cinzel: 'Cinzel Decorative', cursive;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-gray-900 dark:bg-dark-mode-black dark:text-white transition-colors duration-300;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-cinzel;
+  }
+}
+
+@layer components {
+  .magical-glow {
+    position: relative;
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  .sparkle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #6A0DAD;
+    border-radius: 50%;
+    animation: sparkle 1.5s ease-in-out infinite;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #6A0DAD 0%, #9D4EDD 50%, #E0AAFF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+@layer utilities {
+  .text-shadow-glow {
+    text-shadow: 0 0 10px rgba(106, 13, 173, 0.5),
+                 0 0 20px rgba(106, 13, 173, 0.3);
+  }
 }
