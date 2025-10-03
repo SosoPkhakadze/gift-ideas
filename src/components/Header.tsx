@@ -39,10 +39,16 @@ const Header = () => {
           
           <nav className="flex items-center gap-4 md:gap-6">
             <Link 
-              href="/gift-finder" 
+              href="/" 
               className="text-gray-700 dark:text-gray-300 hover:text-primary-purple dark:hover:text-purple-glow transition-colors font-medium"
             >
               Find Gifts
+            </Link>
+            <Link 
+              href="/top-gifts" 
+              className="text-gray-700 dark:text-gray-300 hover:text-primary-purple dark:hover:text-purple-glow transition-colors font-medium"
+            >
+              Top Gifts
             </Link>
             <Link 
               href="/about" 
