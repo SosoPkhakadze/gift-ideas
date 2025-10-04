@@ -1,4 +1,3 @@
-/* Import the new 'Inter' font */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
 
 @tailwind base;
@@ -6,18 +5,31 @@
 @tailwind utilities;
 
 @layer base {
-  /* Apply the new background and text colors to the body */
+  /* Set a solid base background color for the new effect to sit on */
   body {
-    @apply bg-radial-light dark:bg-radial-dark text-gray-800 dark:text-gray-200 transition-colors duration-300;
+    @apply bg-white dark:bg-dark-mode-black text-gray-800 dark:text-gray-200 transition-colors duration-300;
   }
 }
 
 @layer components {
-  /* Keep the gradient text utility but simplify it */
   .gradient-text {
     background: linear-gradient(135deg, #6A0DAD 0%, #9D4EDD 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+}
+
+/* Add the keyframes for our floating orb animation */
+@layer utilities {
+  @keyframes floatUp {
+    0% {
+      transform: translateY(0);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translateY(-120vh); /* Move it well past the top of the screen */
+      opacity: 0;
+    }
   }
 }
