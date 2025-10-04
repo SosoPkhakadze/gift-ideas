@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { ChevronLeft, ChevronRight, Check, Sparkles } from 'lucide-react';
@@ -80,10 +80,8 @@ export default function Home() {
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
-    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 2000));
     
-    // Store form data in sessionStorage
     if (typeof window !== 'undefined') {
       sessionStorage.setItem('giftFormData', JSON.stringify(formData));
     }
@@ -119,7 +117,7 @@ export default function Home() {
     }
     
     if (question.type === 'textarea') {
-      return true; // Optional field
+      return true;
     }
     
     return formData[question.id as keyof FormData];
@@ -132,31 +130,31 @@ export default function Home() {
         <meta name="description" content="Answer a few questions and let our AI find the perfect gift for your loved ones" />
       </Head>
 
-      <div className="min-h-[calc(100vh-180px)] flex items-center justify-center py-8 px-4">
-        <div className="w-full max-w-2xl">
+      <div className="min-h-[calc(100vh-180px)] flex items-center justify-center py-12 px-4">
+        <div className="w-full max-w-3xl">
           {/* Progress Bar */}
-          <div className="mb-8">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                Question {currentStep + 1} of {questions.length}
+          <div className="mb-10">
+            <div className="flex justify-between items-center mb-3">
+              <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                Step {currentStep + 1} of {questions.length}
               </span>
-              <span className="text-sm font-medium text-primary-purple">
+              <span className="text-sm font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
                 {Math.round(progress)}% Complete
               </span>
             </div>
-            <div className="h-2 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden">
+            <div className="h-2.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden shadow-inner">
               <motion.div
-                className="h-full bg-gradient-to-r from-primary-purple to-purple-glow"
+                className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full shadow-lg"
                 initial={{ width: 0 }}
                 animate={{ width: `${progress}%` }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.4, ease: 'easeOut' }}
               />
             </div>
           </div>
 
           {/* Question Card */}
           <motion.div
-            className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8"
+            className="glass-card rounded-3xl p-8 md:p-12 shadow-purple"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
@@ -166,9 +164,9 @@ export default function Home() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.2 }}
+                transition={{ duration: 0.3 }}
               >
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-6">
+                <h2 className="text-2xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8 leading-tight">
                   {currentQuestion.question}
                 </h2>
 
@@ -178,10 +176,10 @@ export default function Home() {
                     {currentQuestion.options?.map((option) => (
                       <label
                         key={option}
-                        className={`block p-4 rounded-lg border-2 cursor-pointer transition-all ${
+                        className={`block p-5 rounded-2xl border-2 cursor-pointer transition-all duration-200 ${
                           formData[currentQuestion.id as keyof FormData] === option
-                            ? 'border-primary-purple bg-purple-50 dark:bg-purple-900/20'
-                            : 'border-gray-200 dark:border-gray-700 hover:border-primary-purple/50'
+                            ? 'border-indigo-500 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 shadow-md'
+                            : 'border-gray-200 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-600 hover:shadow-sm'
                         }`}
                       >
                         <input
@@ -199,7 +197,7 @@ export default function Home() {
                           }}
                           className="sr-only"
                         />
-                        <span className="font-medium text-gray-900 dark:text-white">{option}</span>
+                        <span className="font-semibold text-gray-900 dark:text-white">{option}</span>
                       </label>
                     ))}
                     
@@ -211,7 +209,7 @@ export default function Home() {
                         placeholder="Please specify..."
                         value={formData[`${currentQuestion.id}Custom` as keyof FormData] || ''}
                         onChange={(e) => setFormData({ ...formData, [`${currentQuestion.id}Custom`]: e.target.value })}
-                        className="w-full px-4 py-3 rounded-lg border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-primary-purple focus:border-transparent outline-none transition"
+                        className="input-field mt-3"
                         autoFocus
                       />
                     )}
@@ -221,9 +219,9 @@ export default function Home() {
                 {/* Price Range */}
                 {currentQuestion.type === 'price-range' && (
                   <div className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
                           From ($)
                         </label>
                         <input
@@ -232,11 +230,11 @@ export default function Home() {
                           placeholder="0"
                           value={formData.priceFrom || ''}
                           onChange={(e) => setFormData({ ...formData, priceFrom: e.target.value })}
-                          className="w-full px-4 py-3 rounded-lg border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-primary-purple focus:border-transparent outline-none transition"
+                          className="input-field"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
                           To ($)
                         </label>
                         <input
@@ -245,12 +243,12 @@ export default function Home() {
                           placeholder="100"
                           value={formData.priceTo || ''}
                           onChange={(e) => setFormData({ ...formData, priceTo: e.target.value })}
-                          className="w-full px-4 py-3 rounded-lg border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-primary-purple focus:border-transparent outline-none transition"
+                          className="input-field"
                         />
                       </div>
                     </div>
                     {formData.priceFrom && formData.priceTo && Number(formData.priceFrom) > Number(formData.priceTo) && (
-                      <p className="text-sm text-red-500">From price should be less than To price</p>
+                      <p className="text-sm text-red-500 font-medium">From price should be less than To price</p>
                     )}
                   </div>
                 )}
@@ -261,10 +259,10 @@ export default function Home() {
                     {currentQuestion.options?.map((option) => (
                       <label
                         key={option}
-                        className={`block p-4 rounded-lg border-2 cursor-pointer transition-all ${
+                        className={`block p-5 rounded-2xl border-2 cursor-pointer transition-all duration-200 ${
                           formData[currentQuestion.id as keyof FormData] === option
-                            ? 'border-primary-purple bg-purple-50 dark:bg-purple-900/20'
-                            : 'border-gray-200 dark:border-gray-700 hover:border-primary-purple/50'
+                            ? 'border-indigo-500 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 shadow-md'
+                            : 'border-gray-200 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-600 hover:shadow-sm'
                         }`}
                       >
                         <input
@@ -275,7 +273,7 @@ export default function Home() {
                           onChange={(e) => setFormData({ ...formData, [currentQuestion.id]: e.target.value })}
                           className="sr-only"
                         />
-                        <span className="font-medium text-gray-900 dark:text-white">{option}</span>
+                        <span className="font-semibold text-gray-900 dark:text-white">{option}</span>
                       </label>
                     ))}
                   </div>
@@ -288,7 +286,7 @@ export default function Home() {
                     placeholder={currentQuestion.placeholder}
                     value={formData[currentQuestion.id as keyof FormData] || ''}
                     onChange={(e) => setFormData({ ...formData, [currentQuestion.id]: e.target.value })}
-                    className="w-full px-4 py-3 rounded-lg border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-primary-purple focus:border-transparent outline-none transition"
+                    className="input-field"
                   />
                 )}
 
@@ -298,22 +296,22 @@ export default function Home() {
                     placeholder={currentQuestion.placeholder}
                     value={formData[currentQuestion.id as keyof FormData] || ''}
                     onChange={(e) => setFormData({ ...formData, [currentQuestion.id]: e.target.value })}
-                    rows={4}
-                    className="w-full px-4 py-3 rounded-lg border-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 focus:ring-2 focus:ring-primary-purple focus:border-transparent outline-none transition resize-none"
+                    rows={5}
+                    className="input-field resize-none"
                   />
                 )}
               </motion.div>
             </AnimatePresence>
 
             {/* Navigation Buttons */}
-            <div className="flex justify-between mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+            <div className="flex justify-between mt-10 pt-8 border-t border-gray-200 dark:border-gray-700">
               <button
                 onClick={handleBack}
                 disabled={currentStep === 0}
-                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all ${
+                className={`flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold transition-all duration-200 ${
                   currentStep === 0
                     ? 'text-gray-400 cursor-not-allowed'
-                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 border-2 border-transparent hover:border-gray-200 dark:hover:border-gray-700'
                 }`}
               >
                 <ChevronLeft className="w-5 h-5" />
@@ -323,10 +321,10 @@ export default function Home() {
               <button
                 onClick={handleNext}
                 disabled={!isStepValid() || isSubmitting}
-                className={`flex items-center gap-2 px-8 py-3 rounded-lg font-bold transition-all ${
+                className={`flex items-center gap-2 px-8 py-3.5 rounded-xl font-bold transition-all duration-200 ${
                   !isStepValid() || isSubmitting
                     ? 'bg-gray-300 dark:bg-gray-700 text-gray-500 cursor-not-allowed'
-                    : 'bg-primary-purple text-white hover:bg-purple-glow shadow-lg hover:shadow-xl'
+                    : 'btn-primary hover:shadow-purple-lg'
                 }`}
               >
                 {isSubmitting ? (
@@ -336,12 +334,12 @@ export default function Home() {
                   </>
                 ) : currentStep === questions.length - 1 ? (
                   <>
-                    Find Gifts
+                    Find Perfect Gifts
                     <Check className="w-5 h-5" />
                   </>
                 ) : (
                   <>
-                    Next
+                    Continue
                     <ChevronRight className="w-5 h-5" />
                   </>
                 )}

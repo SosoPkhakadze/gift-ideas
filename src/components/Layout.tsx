@@ -13,7 +13,7 @@ const Layout = ({ children }: LayoutProps) => {
     <div className="min-h-screen flex flex-col relative">
       <AnimatedBackground />
       <Header />
-      <main className="flex-grow container mx-auto px-4 py-8 z-10">
+      <main className="flex-grow container mx-auto px-4 py-8 z-10 relative">
         {children}
       </main>
       <Footer />
