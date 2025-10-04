@@ -6,20 +6,23 @@ export const giftCategories = [
     slug: 'art-lovers',
     description: 'Creative gifts for artists and art enthusiasts.',
     count: 15,
-    imageUrl: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-4.0.3&q=80&w=600&h=400&fit=crop',
+    // New working image URL
+    imageUrl: 'https://images.unsplash.com/photo-1578926375605-eaf7559b1458?q=80&w=600&h=400&fit=crop',
   },
   {
     title: 'For Coffee Enthusiasts',
     slug: 'coffee-lovers',
     description: 'Perfect picks for caffeine connoisseurs.',
     count: 20,
-    imageUrl: 'https://images.unsplash.com/photo-1511920183353-8b2b5f21d7b7?ixlib=rb-4.0.3&q=80&w=600&h=400&fit=crop',
+    // New working image URL
+    imageUrl: 'https://images.unsplash.com/photo-1559496417-e7f25cb247f3?q=80&w=600&h=400&fit=crop',
   },
   {
     title: 'For Gamers',
     slug: 'gamers',
     description: 'Level up their gaming experience.',
     count: 25,
+    // New working image URL
     imageUrl: 'https://images.unsplash.com/photo-1580327344181-c1163234e5a0?ixlib=rb-4.0.3&q=80&w=600&h=400&fit=crop',
   },
   {
@@ -27,25 +30,29 @@ export const giftCategories = [
     slug: 'book-lovers',
     description: 'Thoughtful gifts for avid readers.',
     count: 18,
-    imageUrl: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&q=80&w=600&h=400&fit=crop',
+    // New working image URL
+    imageUrl: 'https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=600&h=400&fit=crop',
   },
   {
     title: 'For Music Fans',
     slug: 'music-lovers',
     description: 'Strike the right chord with music lovers.',
     count: 22,
-    imageUrl: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&q=80&w=600&h=400&fit=crop',
+    // New working image URL
+    imageUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=600&h=400&fit=crop',
   },
   {
     title: 'For Photography Enthusiasts',
     slug: 'photographers',
     description: 'Capture special moments with these gifts.',
     count: 16,
-    imageUrl: 'https://images.unsplash.com/photo-1512756290469-ec264b7fbf87?ixlib=rb-4.0.3&q=80&w=600&h=400&fit=crop',
+    // New working image URL
+    imageUrl: 'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?q=80&w=600&h=400&fit=crop',
   },
 ];
 
 export const popularLists = [
+    // This data remains the same
   {
     rank: 1,
     title: 'Top 10 Gifts for Your Girlfriend',
