@@ -5,29 +5,32 @@ import { Moon, Sun, Gift } from 'lucide-react';
 const Header = () => {
   const [darkMode, setDarkMode] = useState(false);
 
+  // This effect runs once on the client to set the theme
   useEffect(() => {
-    // Check for saved theme preference or default to light mode
-    const isDark = localStorage.getItem('theme') === 'dark';
+    const isDark = localStorage.getItem('theme') === 'dark' || 
+                   (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
     setDarkMode(isDark);
     if (isDark) {
       document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
     }
   }, []);
 
   const toggleDarkMode = () => {
-    if (darkMode) {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-      setDarkMode(false);
-    } else {
+    const isDark = !darkMode;
+    setDarkMode(isDark);
+    if (isDark) {
       document.documentElement.classList.add('dark');
       localStorage.setItem('theme', 'dark');
-      setDarkMode(true);
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
     }
   };
 
   return (
-    <header className="py-4 md:py-6 bg-white/90 dark:bg-dark-mode-black/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
+    <header className="py-4 md:py-6 bg-white/80 dark:bg-dark-mode-black/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           <Link href="/" className="flex items-center gap-2 group">
@@ -50,6 +53,13 @@ const Header = () => {
             >
               Top Gifts
             </Link>
+            {/* NEW BLOGS LINK */}
+            <Link 
+              href="/blogs" 
+              className="text-gray-700 dark:text-gray-300 hover:text-primary-purple dark:hover:text-purple-glow transition-colors font-medium"
+            >
+              Blogs
+            </Link>
             <Link 
               href="/about" 
               className="hidden md:inline text-gray-700 dark:text-gray-300 hover:text-primary-purple dark:hover:text-purple-glow transition-colors font-medium"
@@ -57,7 +67,6 @@ const Header = () => {
               About
             </Link>
             
-            {/* Dark Mode Toggle */}
             <button
               onClick={toggleDarkMode}
               className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"

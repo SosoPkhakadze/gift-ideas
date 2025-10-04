@@ -2,7 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['example.com'], // add any domains you need for product images
+    // Add the domain for our Unsplash placeholder images
+    domains: ['images.unsplash.com'],
   },
 };
 
