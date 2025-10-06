@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/router';
-import { ChevronLeft, ChevronRight, Check, Sparkles } from 'lucide-react';
 import Head from 'next/head';
+// Import Shield icon at the top
+import { ChevronLeft, ChevronRight, Check, Sparkles, Gift, Zap, Heart, Shield } from 'lucide-react';
 
 type FormData = {
   giftFor: string;
@@ -20,37 +21,43 @@ const questions = [
   {
     id: 'giftFor',
     question: 'Who is this gift for?',
+    subtitle: 'Let us know who you\'re shopping for',
     type: 'select-or-custom',
     options: ['Mother', 'Father', 'Partner', 'Friend', 'Colleague', 'Child', 'Other'],
   },
   {
     id: 'priceRange',
     question: 'What is your budget?',
+    subtitle: 'Set a price range that works for you',
     type: 'price-range',
   },
   {
     id: 'location',
     question: 'Where are you located?',
+    subtitle: 'This helps us find available products',
     type: 'select-or-custom',
     options: ['United States', 'United Kingdom', 'Canada', 'Australia', 'Europe', 'Asia', 'Other'],
   },
   {
     id: 'occasion',
     question: 'What\'s the occasion?',
+    subtitle: 'Special moments deserve special gifts',
     type: 'select',
     options: ['Birthday', 'Anniversary', 'Wedding', 'Christmas', 'Valentine\'s Day', 'Graduation', 'Thank You', 'Just Because'],
   },
   {
     id: 'interests',
     question: 'What are their main interests?',
+    subtitle: 'Share what makes them unique',
     type: 'text',
     placeholder: 'e.g., reading, gaming, cooking, sports, travel, art...',
   },
   {
     id: 'additionalDetails',
-    question: 'Any additional details to help us find the perfect gift?',
+    question: 'Any additional details?',
+    subtitle: 'Optional: Share anything else that might help',
     type: 'textarea',
-    placeholder: 'Share anything else that might help - personality traits, recent conversations, wishes they mentioned...',
+    placeholder: 'Personality traits, recent conversations, wishes they mentioned...',
   },
 ];
 
@@ -131,33 +138,117 @@ export default function Home() {
       </Head>
 
       <div className="min-h-[calc(100vh-180px)] flex items-center justify-center py-12 px-4">
-        <div className="w-full max-w-3xl">
-          {/* Progress Bar */}
-          <div className="mb-10">
-            <div className="flex justify-between items-center mb-3">
-              <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-                Step {currentStep + 1} of {questions.length}
-              </span>
-              <span className="text-sm font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                {Math.round(progress)}% Complete
-              </span>
-            </div>
-            <div className="h-2.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden shadow-inner">
+        <div className="w-full max-w-4xl">
+          {/* Hero Section - Only on first step */}
+          {currentStep === 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center mb-12"
+            >
               <motion.div
-                className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full shadow-lg"
+                animate={{ 
+                  rotate: [0, 10, -10, 0],
+                  scale: [1, 1.1, 1]
+                }}
+                transition={{ 
+                  duration: 3,
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }}
+                className="inline-block mb-6"
+              >
+                <div className="w-20 h-20 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-3xl flex items-center justify-center shadow-2xl shadow-purple-500/50 relative">
+                  <Gift className="w-10 h-10 text-white" />
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400 blur-xl opacity-50 animate-pulse"></div>
+                </div>
+              </motion.div>
+              
+              <h1 className="text-5xl md:text-7xl font-black mb-6 leading-tight">
+                <span className="gradient-text">Find the Perfect Gift</span>
+              </h1>
+              
+              <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8 font-medium">
+                Answer a few questions and let our AI discover the ideal gift for your loved ones
+              </p>
+
+              <div className="flex flex-wrap justify-center gap-4 text-sm">
+                <div className="flex items-center gap-2 px-4 py-2 bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-full border border-gray-200 dark:border-gray-700 shadow-lg">
+                  <Zap className="w-4 h-4 text-yellow-500" />
+                  <span className="font-semibold">AI-Powered</span>
+                </div>
+                <div className="flex items-center gap-2 px-4 py-2 bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-full border border-gray-200 dark:border-gray-700 shadow-lg">
+                  <Heart className="w-4 h-4 text-red-500" />
+                  <span className="font-semibold">Personalized</span>
+                </div>
+                <div className="flex items-center gap-2 px-4 py-2 bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-full border border-gray-200 dark:border-gray-700 shadow-lg">
+                  <Sparkles className="w-4 h-4 text-indigo-500" />
+                  <span className="font-semibold">Curated</span>
+                </div>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Progress Indicator */}
+          <div className="mb-10">
+            <div className="flex justify-between items-center mb-4">
+              <motion.span 
+                key={currentStep}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="text-sm font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent"
+              >
+                Step {currentStep + 1} of {questions.length}
+              </motion.span>
+              <motion.span 
+                key={`progress-${currentStep}`}
+                initial={{ opacity: 0, x: 10 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="text-sm font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"
+              >
+                {Math.round(progress)}% Complete
+              </motion.span>
+            </div>
+            
+            {/* Enhanced progress bar */}
+            <div className="relative h-3 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden shadow-inner">
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full shadow-lg"
                 initial={{ width: 0 }}
                 animate={{ width: `${progress}%` }}
-                transition={{ duration: 0.4, ease: 'easeOut' }}
-              />
+                transition={{ duration: 0.5, ease: 'easeOut' }}
+              >
+                <div className="absolute inset-0 shimmer"></div>
+              </motion.div>
+              
+              {/* Animated dots */}
+              <div className="absolute inset-0 flex items-center justify-between px-1">
+                {questions.map((_, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ scale: 0 }}
+                    animate={{ scale: idx <= currentStep ? 1 : 0.5 }}
+                    className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                      idx <= currentStep 
+                        ? 'bg-white shadow-lg shadow-white/50' 
+                        : 'bg-gray-400 dark:bg-gray-600'
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
 
           {/* Question Card */}
           <motion.div
-            className="glass-card rounded-3xl p-8 md:p-12 shadow-purple"
+            className="glass-card rounded-3xl p-8 md:p-12 shadow-2xl border-2 border-white/30 dark:border-gray-700/30 relative overflow-hidden"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
+            {/* Decorative elements */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-pink-500/10 to-purple-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentStep}
@@ -165,21 +256,30 @@ export default function Home() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.3 }}
+                className="relative z-10"
               >
-                <h2 className="text-2xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8 leading-tight">
-                  {currentQuestion.question}
-                </h2>
+                {/* Question header */}
+                <div className="mb-8">
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3 leading-tight">
+                    {currentQuestion.question}
+                  </h2>
+                  <p className="text-base text-gray-600 dark:text-gray-400">
+                    {currentQuestion.subtitle}
+                  </p>
+                </div>
 
                 {/* Select or Custom Input */}
                 {currentQuestion.type === 'select-or-custom' && (
                   <div className="space-y-3">
                     {currentQuestion.options?.map((option) => (
-                      <label
+                      <motion.label
                         key={option}
-                        className={`block p-5 rounded-2xl border-2 cursor-pointer transition-all duration-200 ${
+                        whileHover={{ scale: 1.01 }}
+                        whileTap={{ scale: 0.99 }}
+                        className={`block p-5 rounded-2xl border-2 cursor-pointer transition-all duration-200 relative overflow-hidden ${
                           formData[currentQuestion.id as keyof FormData] === option
-                            ? 'border-indigo-500 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 shadow-md'
-                            : 'border-gray-200 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-600 hover:shadow-sm'
+                            ? 'border-indigo-500 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-950/40 dark:to-purple-950/40 shadow-lg shadow-indigo-500/20'
+                            : 'border-gray-200 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-600 hover:shadow-md bg-white/50 dark:bg-gray-800/50'
                         }`}
                       >
                         <input
@@ -197,8 +297,19 @@ export default function Home() {
                           }}
                           className="sr-only"
                         />
-                        <span className="font-semibold text-gray-900 dark:text-white">{option}</span>
-                      </label>
+                        <div className="flex items-center justify-between">
+                          <span className="font-bold text-gray-900 dark:text-white text-lg">{option}</span>
+                          {formData[currentQuestion.id as keyof FormData] === option && (
+                            <motion.div
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                              className="w-6 h-6 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full flex items-center justify-center"
+                            >
+                              <Check className="w-4 h-4 text-white" />
+                            </motion.div>
+                          )}
+                        </div>
+                      </motion.label>
                     ))}
                     
                     {showCustomInput[currentQuestion.id] && (
@@ -218,37 +329,49 @@ export default function Home() {
 
                 {/* Price Range */}
                 {currentQuestion.type === 'price-range' && (
-                  <div className="space-y-4">
+                  <div className="space-y-6">
                     <div className="grid grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
-                          From ($)
+                        <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-3">
+                          Minimum Price ($)
                         </label>
-                        <input
-                          type="number"
-                          min="0"
-                          placeholder="0"
-                          value={formData.priceFrom || ''}
-                          onChange={(e) => setFormData({ ...formData, priceFrom: e.target.value })}
-                          className="input-field"
-                        />
+                        <div className="relative">
+                          <span className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-500 text-lg font-bold">$</span>
+                          <input
+                            type="number"
+                            min="0"
+                            placeholder="0"
+                            value={formData.priceFrom || ''}
+                            onChange={(e) => setFormData({ ...formData, priceFrom: e.target.value })}
+                            className="input-field pl-10 text-lg font-semibold"
+                          />
+                        </div>
                       </div>
                       <div>
-                        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
-                          To ($)
+                        <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-3">
+                          Maximum Price ($)
                         </label>
-                        <input
-                          type="number"
-                          min="0"
-                          placeholder="100"
-                          value={formData.priceTo || ''}
-                          onChange={(e) => setFormData({ ...formData, priceTo: e.target.value })}
-                          className="input-field"
-                        />
+                        <div className="relative">
+                          <span className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-500 text-lg font-bold">$</span>
+                          <input
+                            type="number"
+                            min="0"
+                            placeholder="100"
+                            value={formData.priceTo || ''}
+                            onChange={(e) => setFormData({ ...formData, priceTo: e.target.value })}
+                            className="input-field pl-10 text-lg font-semibold"
+                          />
+                        </div>
                       </div>
                     </div>
                     {formData.priceFrom && formData.priceTo && Number(formData.priceFrom) > Number(formData.priceTo) && (
-                      <p className="text-sm text-red-500 font-medium">From price should be less than To price</p>
+                      <motion.p 
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="text-sm text-red-500 font-semibold bg-red-50 dark:bg-red-900/20 px-4 py-2 rounded-xl"
+                      >
+                        Minimum price should be less than maximum price
+                      </motion.p>
                     )}
                   </div>
                 )}
@@ -257,12 +380,14 @@ export default function Home() {
                 {currentQuestion.type === 'select' && (
                   <div className="space-y-3">
                     {currentQuestion.options?.map((option) => (
-                      <label
+                      <motion.label
                         key={option}
-                        className={`block p-5 rounded-2xl border-2 cursor-pointer transition-all duration-200 ${
+                        whileHover={{ scale: 1.01 }}
+                        whileTap={{ scale: 0.99 }}
+                        className={`block p-5 rounded-2xl border-2 cursor-pointer transition-all duration-200 relative overflow-hidden ${
                           formData[currentQuestion.id as keyof FormData] === option
-                            ? 'border-indigo-500 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 shadow-md'
-                            : 'border-gray-200 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-600 hover:shadow-sm'
+                            ? 'border-indigo-500 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-950/40 dark:to-purple-950/40 shadow-lg shadow-indigo-500/20'
+                            : 'border-gray-200 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-600 hover:shadow-md bg-white/50 dark:bg-gray-800/50'
                         }`}
                       >
                         <input
@@ -273,8 +398,19 @@ export default function Home() {
                           onChange={(e) => setFormData({ ...formData, [currentQuestion.id]: e.target.value })}
                           className="sr-only"
                         />
-                        <span className="font-semibold text-gray-900 dark:text-white">{option}</span>
-                      </label>
+                        <div className="flex items-center justify-between">
+                          <span className="font-bold text-gray-900 dark:text-white text-lg">{option}</span>
+                          {formData[currentQuestion.id as keyof FormData] === option && (
+                            <motion.div
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                              className="w-6 h-6 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full flex items-center justify-center"
+                            >
+                              <Check className="w-4 h-4 text-white" />
+                            </motion.div>
+                          )}
+                        </div>
+                      </motion.label>
                     ))}
                   </div>
                 )}
@@ -286,7 +422,8 @@ export default function Home() {
                     placeholder={currentQuestion.placeholder}
                     value={formData[currentQuestion.id as keyof FormData] || ''}
                     onChange={(e) => setFormData({ ...formData, [currentQuestion.id]: e.target.value })}
-                    className="input-field"
+                    className="input-field text-lg"
+                    autoFocus
                   />
                 )}
 
@@ -296,44 +433,55 @@ export default function Home() {
                     placeholder={currentQuestion.placeholder}
                     value={formData[currentQuestion.id as keyof FormData] || ''}
                     onChange={(e) => setFormData({ ...formData, [currentQuestion.id]: e.target.value })}
-                    rows={5}
-                    className="input-field resize-none"
+                    rows={6}
+                    className="input-field resize-none text-lg"
+                    autoFocus
                   />
                 )}
               </motion.div>
             </AnimatePresence>
 
             {/* Navigation Buttons */}
-            <div className="flex justify-between mt-10 pt-8 border-t border-gray-200 dark:border-gray-700">
-              <button
+            <div className="flex justify-between mt-10 pt-8 border-t border-gray-200 dark:border-gray-700 relative z-10">
+              <motion.button
+                whileHover={{ scale: currentStep === 0 ? 1 : 1.05 }}
+                whileTap={{ scale: currentStep === 0 ? 1 : 0.95 }}
                 onClick={handleBack}
                 disabled={currentStep === 0}
-                className={`flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold transition-all duration-200 ${
+                className={`flex items-center gap-2 px-6 py-4 rounded-xl font-bold transition-all duration-200 ${
                   currentStep === 0
-                    ? 'text-gray-400 cursor-not-allowed'
-                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 border-2 border-transparent hover:border-gray-200 dark:hover:border-gray-700'
+                    ? 'text-gray-400 cursor-not-allowed bg-gray-100 dark:bg-gray-800'
+                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 shadow-md hover:shadow-lg'
                 }`}
               >
                 <ChevronLeft className="w-5 h-5" />
                 Back
-              </button>
+              </motion.button>
 
-              <button
+              <motion.button
+                whileHover={{ scale: !isStepValid() || isSubmitting ? 1 : 1.05 }}
+                whileTap={{ scale: !isStepValid() || isSubmitting ? 1 : 0.95 }}
                 onClick={handleNext}
                 disabled={!isStepValid() || isSubmitting}
-                className={`flex items-center gap-2 px-8 py-3.5 rounded-xl font-bold transition-all duration-200 ${
+                className={`flex items-center gap-3 px-8 py-4 rounded-2xl font-bold transition-all duration-300 relative overflow-hidden ${
                   !isStepValid() || isSubmitting
                     ? 'bg-gray-300 dark:bg-gray-700 text-gray-500 cursor-not-allowed'
-                    : 'btn-primary hover:shadow-purple-lg'
+                    : 'btn-primary'
                 }`}
               >
                 {isSubmitting ? (
                   <>
-                    <Sparkles className="w-5 h-5 animate-spin" />
-                    Finding Gifts...
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                    >
+                      <Sparkles className="w-5 h-5" />
+                    </motion.div>
+                    Finding Perfect Gifts...
                   </>
                 ) : currentStep === questions.length - 1 ? (
                   <>
+                    <Sparkles className="w-5 h-5" />
                     Find Perfect Gifts
                     <Check className="w-5 h-5" />
                   </>
@@ -343,11 +491,25 @@ export default function Home() {
                     <ChevronRight className="w-5 h-5" />
                   </>
                 )}
-              </button>
+              </motion.button>
             </div>
+          </motion.div>
+
+          {/* Trust indicators */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="mt-8 text-center text-sm text-gray-500 dark:text-gray-400"
+          >
+            <p className="flex items-center justify-center gap-2">
+              <Shield className="w-4 h-4" />
+              Your information is secure and never shared
+            </p>
           </motion.div>
         </div>
       </div>
     </>
   );
 }
+

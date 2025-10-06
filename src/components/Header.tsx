@@ -1,11 +1,13 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Moon, Sun, Gift } from 'lucide-react';
+import { Moon, Sun, Gift, Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Header = () => {
   const [darkMode, setDarkMode] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  // This effect runs once on the client to set the theme
   useEffect(() => {
     const isDark = localStorage.getItem('theme') === 'dark' || 
                    (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
@@ -15,6 +17,13 @@ const Header = () => {
     } else {
       document.documentElement.classList.remove('dark');
     }
+
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const toggleDarkMode = () => {
@@ -29,57 +38,151 @@ const Header = () => {
     }
   };
 
+  const navLinks = [
+    { href: '/', label: 'Find Gifts' },
+    { href: '/top-gifts', label: 'Top Gifts' },
+    { href: '/blogs', label: 'Blogs' },
+    { href: '/about', label: 'About' },
+  ];
+
   return (
-    <header className="py-4 md:py-6 bg-white/80 dark:bg-dark-mode-black/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
+    <header className={`sticky top-0 z-50 transition-all duration-300 ${
+      scrolled 
+        ? 'py-3 md:py-4 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl shadow-lg shadow-gray-200/50 dark:shadow-gray-900/50' 
+        : 'py-5 md:py-6 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md'
+    }`}>
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
-          <Link href="/" className="flex items-center gap-2 group">
-            <Gift className="w-8 h-8 text-primary-purple transition-transform group-hover:rotate-12" />
-            <span className="text-2xl md:text-3xl font-bold gradient-text">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-3 group">
+            <motion.div
+              whileHover={{ rotate: 12, scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="relative"
+            >
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-2xl group-hover:shadow-purple-500/50 transition-all duration-300">
+                <Gift className="w-5 h-5 md:w-6 md:h-6 text-white" />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400 rounded-2xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
+            </motion.div>
+            <span className="text-2xl md:text-3xl font-black gradient-text">
               Gift Ideas
             </span>
           </Link>
           
-          <nav className="flex items-center gap-4 md:gap-6">
-            <Link 
-              href="/" 
-              className="text-gray-700 dark:text-gray-300 hover:text-primary-purple dark:hover:text-purple-glow transition-colors font-medium"
-            >
-              Find Gifts
-            </Link>
-            <Link 
-              href="/top-gifts" 
-              className="text-gray-700 dark:text-gray-300 hover:text-primary-purple dark:hover:text-purple-glow transition-colors font-medium"
-            >
-              Top Gifts
-            </Link>
-            {/* NEW BLOGS LINK */}
-            <Link 
-              href="/blogs" 
-              className="text-gray-700 dark:text-gray-300 hover:text-primary-purple dark:hover:text-purple-glow transition-colors font-medium"
-            >
-              Blogs
-            </Link>
-            <Link 
-              href="/about" 
-              className="hidden md:inline text-gray-700 dark:text-gray-300 hover:text-primary-purple dark:hover:text-purple-glow transition-colors font-medium"
-            >
-              About
-            </Link>
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <Link 
+                key={link.href}
+                href={link.href}
+                className="relative text-gray-700 dark:text-gray-300 hover:text-transparent font-bold transition-all duration-300 group"
+              >
+                <span className="relative z-10 group-hover:bg-gradient-to-r group-hover:from-indigo-600 group-hover:to-purple-600 group-hover:bg-clip-text group-hover:text-transparent">
+                  {link.label}
+                </span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-600 to-purple-600 group-hover:w-full transition-all duration-300"></span>
+              </Link>
+            ))}
             
-            <button
+            {/* Dark Mode Toggle */}
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
               onClick={toggleDarkMode}
-              className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              className="p-3 rounded-2xl bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 hover:shadow-lg transition-all duration-300 relative overflow-hidden group"
+              aria-label="Toggle dark mode"
+            >
+              <AnimatePresence mode="wait">
+                {darkMode ? (
+                  <motion.div
+                    key="sun"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Sun className="w-5 h-5 text-yellow-500" />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="moon"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Moon className="w-5 h-5 text-indigo-600" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </motion.button>
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <div className="flex lg:hidden items-center gap-3">
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={toggleDarkMode}
+              className="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 hover:shadow-md transition-all"
               aria-label="Toggle dark mode"
             >
               {darkMode ? (
                 <Sun className="w-5 h-5 text-yellow-500" />
               ) : (
-                <Moon className="w-5 h-5 text-primary-purple" />
+                <Moon className="w-5 h-5 text-indigo-600" />
               )}
-            </button>
-          </nav>
+            </motion.button>
+
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2.5 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 text-white shadow-lg hover:shadow-xl transition-all"
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
+            </motion.button>
+          </div>
         </div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="lg:hidden overflow-hidden"
+            >
+              <nav className="flex flex-col gap-2 pt-6 pb-4">
+                {navLinks.map((link, index) => (
+                  <motion.div
+                    key={link.href}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <Link 
+                      href={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block px-6 py-4 rounded-2xl font-bold text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 dark:hover:from-indigo-950/30 dark:hover:to-purple-950/30 hover:text-indigo-600 dark:hover:text-purple-400 transition-all duration-200"
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
+                ))}
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </header>
   );
