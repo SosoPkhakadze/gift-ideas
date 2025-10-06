@@ -13,6 +13,9 @@
 
   html {
     scroll-behavior: smooth;
+    /* By default, the browser font-size is 16px. 
+       Setting it to 15px makes all rem units slightly smaller. */
+    font-size: 15px;
   }
 
   ::-webkit-scrollbar {
@@ -67,7 +70,7 @@
 
   /* Enhanced primary button */
   .btn-primary {
-    @apply px-8 py-4 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white font-bold rounded-2xl shadow-lg hover:shadow-2xl hover:shadow-purple-500/50 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 relative overflow-hidden;
+    @apply px-6 py-3 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white font-bold rounded-xl shadow-lg hover:shadow-2xl hover:shadow-purple-500/50 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 relative overflow-hidden;
     background-size: 200% auto;
   }
 
@@ -95,7 +98,7 @@
 
   /* Secondary button */
   .btn-secondary {
-    @apply px-6 py-3 bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl text-gray-900 dark:text-gray-100 font-semibold rounded-xl border-2 border-gray-200 dark:border-gray-700 hover:border-indigo-400 dark:hover:border-indigo-500 shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-200;
+    @apply px-5 py-2.5 bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl text-gray-900 dark:text-gray-100 font-semibold rounded-xl border-2 border-gray-200 dark:border-gray-700 hover:border-indigo-400 dark:hover:border-indigo-500 shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-200;
   }
 
   /* Card hover effects */
@@ -105,7 +108,7 @@
 
   /* Enhanced input fields */
   .input-field {
-    @apply w-full px-5 py-4 rounded-2xl border-2 border-gray-200 dark:border-gray-700 bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:focus:ring-purple-500 dark:focus:border-purple-500 outline-none transition-all duration-300 shadow-sm hover:shadow-md;
+    @apply w-full px-4 py-3 rounded-xl border-2 border-gray-200 dark:border-gray-700 bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:focus:ring-purple-500 dark:focus:border-purple-500 outline-none transition-all duration-300 shadow-sm hover:shadow-md;
   }
 
   /* Floating label effect */

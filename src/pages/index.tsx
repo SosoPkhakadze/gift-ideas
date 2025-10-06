@@ -138,7 +138,7 @@ export default function Home() {
       </Head>
 
       <div className="min-h-[calc(100vh-180px)] flex items-center justify-center py-12 px-4">
-        <div className="w-full max-w-4xl">
+        <div className="w-full max-w-3xl">
           {/* Hero Section - Only on first step */}
           {currentStep === 0 && (
             <motion.div
@@ -158,17 +158,17 @@ export default function Home() {
                 }}
                 className="inline-block mb-6"
               >
-                <div className="w-20 h-20 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-3xl flex items-center justify-center shadow-2xl shadow-purple-500/50 relative">
-                  <Gift className="w-10 h-10 text-white" />
+                <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-3xl flex items-center justify-center shadow-2xl shadow-purple-500/50 relative">
+                  <Gift className="w-9 h-9 text-white" />
                   <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400 blur-xl opacity-50 animate-pulse"></div>
                 </div>
               </motion.div>
               
-              <h1 className="text-5xl md:text-7xl font-black mb-6 leading-tight">
+              <h1 className="text-4xl md:text-5xl font-black mb-4 leading-tight">
                 <span className="gradient-text">Find the Perfect Gift</span>
               </h1>
               
-              <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8 font-medium">
+              <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-xl mx-auto mb-8 font-medium">
                 Answer a few questions and let our AI discover the ideal gift for your loved ones
               </p>
 
@@ -190,8 +190,8 @@ export default function Home() {
           )}
 
           {/* Progress Indicator */}
-          <div className="mb-10">
-            <div className="flex justify-between items-center mb-4">
+          <div className="mb-8">
+            <div className="flex justify-between items-center mb-3">
               <motion.span 
                 key={currentStep}
                 initial={{ opacity: 0, x: -10 }}
@@ -211,7 +211,7 @@ export default function Home() {
             </div>
             
             {/* Enhanced progress bar */}
-            <div className="relative h-3 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden shadow-inner">
+            <div className="relative h-2.5 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden shadow-inner">
               <motion.div
                 className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full shadow-lg"
                 initial={{ width: 0 }}
@@ -228,7 +228,7 @@ export default function Home() {
                     key={idx}
                     initial={{ scale: 0 }}
                     animate={{ scale: idx <= currentStep ? 1 : 0.5 }}
-                    className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
                       idx <= currentStep 
                         ? 'bg-white shadow-lg shadow-white/50' 
                         : 'bg-gray-400 dark:bg-gray-600'
@@ -241,7 +241,7 @@ export default function Home() {
 
           {/* Question Card */}
           <motion.div
-            className="glass-card rounded-3xl p-8 md:p-12 shadow-2xl border-2 border-white/30 dark:border-gray-700/30 relative overflow-hidden"
+            className="glass-card rounded-3xl p-6 md:p-10 shadow-2xl border-2 border-white/30 dark:border-gray-700/30 relative overflow-hidden"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
@@ -259,8 +259,8 @@ export default function Home() {
                 className="relative z-10"
               >
                 {/* Question header */}
-                <div className="mb-8">
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3 leading-tight">
+                <div className="mb-6">
+                  <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2 leading-tight">
                     {currentQuestion.question}
                   </h2>
                   <p className="text-base text-gray-600 dark:text-gray-400">
@@ -276,7 +276,7 @@ export default function Home() {
                         key={option}
                         whileHover={{ scale: 1.01 }}
                         whileTap={{ scale: 0.99 }}
-                        className={`block p-5 rounded-2xl border-2 cursor-pointer transition-all duration-200 relative overflow-hidden ${
+                        className={`block p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 relative overflow-hidden ${
                           formData[currentQuestion.id as keyof FormData] === option
                             ? 'border-indigo-500 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-950/40 dark:to-purple-950/40 shadow-lg shadow-indigo-500/20'
                             : 'border-gray-200 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-600 hover:shadow-md bg-white/50 dark:bg-gray-800/50'
@@ -298,14 +298,14 @@ export default function Home() {
                           className="sr-only"
                         />
                         <div className="flex items-center justify-between">
-                          <span className="font-bold text-gray-900 dark:text-white text-lg">{option}</span>
+                          <span className="font-bold text-gray-900 dark:text-white text-base">{option}</span>
                           {formData[currentQuestion.id as keyof FormData] === option && (
                             <motion.div
                               initial={{ scale: 0 }}
                               animate={{ scale: 1 }}
-                              className="w-6 h-6 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full flex items-center justify-center"
+                              className="w-5 h-5 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full flex items-center justify-center"
                             >
-                              <Check className="w-4 h-4 text-white" />
+                              <Check className="w-3 h-3 text-white" />
                             </motion.div>
                           )}
                         </div>
@@ -329,37 +329,37 @@ export default function Home() {
 
                 {/* Price Range */}
                 {currentQuestion.type === 'price-range' && (
-                  <div className="space-y-6">
-                    <div className="grid grid-cols-2 gap-6">
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-3">
+                        <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">
                           Minimum Price ($)
                         </label>
                         <div className="relative">
-                          <span className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-500 text-lg font-bold">$</span>
+                          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-lg font-bold">$</span>
                           <input
                             type="number"
                             min="0"
                             placeholder="0"
                             value={formData.priceFrom || ''}
                             onChange={(e) => setFormData({ ...formData, priceFrom: e.target.value })}
-                            className="input-field pl-10 text-lg font-semibold"
+                            className="input-field pl-8 text-base font-semibold"
                           />
                         </div>
                       </div>
                       <div>
-                        <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-3">
+                        <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">
                           Maximum Price ($)
                         </label>
                         <div className="relative">
-                          <span className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-500 text-lg font-bold">$</span>
+                          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-lg font-bold">$</span>
                           <input
                             type="number"
                             min="0"
                             placeholder="100"
                             value={formData.priceTo || ''}
                             onChange={(e) => setFormData({ ...formData, priceTo: e.target.value })}
-                            className="input-field pl-10 text-lg font-semibold"
+                            className="input-field pl-8 text-base font-semibold"
                           />
                         </div>
                       </div>
@@ -384,7 +384,7 @@ export default function Home() {
                         key={option}
                         whileHover={{ scale: 1.01 }}
                         whileTap={{ scale: 0.99 }}
-                        className={`block p-5 rounded-2xl border-2 cursor-pointer transition-all duration-200 relative overflow-hidden ${
+                        className={`block p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 relative overflow-hidden ${
                           formData[currentQuestion.id as keyof FormData] === option
                             ? 'border-indigo-500 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-950/40 dark:to-purple-950/40 shadow-lg shadow-indigo-500/20'
                             : 'border-gray-200 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-600 hover:shadow-md bg-white/50 dark:bg-gray-800/50'
@@ -399,14 +399,14 @@ export default function Home() {
                           className="sr-only"
                         />
                         <div className="flex items-center justify-between">
-                          <span className="font-bold text-gray-900 dark:text-white text-lg">{option}</span>
+                          <span className="font-bold text-gray-900 dark:text-white text-base">{option}</span>
                           {formData[currentQuestion.id as keyof FormData] === option && (
                             <motion.div
                               initial={{ scale: 0 }}
                               animate={{ scale: 1 }}
-                              className="w-6 h-6 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full flex items-center justify-center"
+                              className="w-5 h-5 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full flex items-center justify-center"
                             >
-                              <Check className="w-4 h-4 text-white" />
+                              <Check className="w-3 h-3 text-white" />
                             </motion.div>
                           )}
                         </div>
@@ -422,7 +422,7 @@ export default function Home() {
                     placeholder={currentQuestion.placeholder}
                     value={formData[currentQuestion.id as keyof FormData] || ''}
                     onChange={(e) => setFormData({ ...formData, [currentQuestion.id]: e.target.value })}
-                    className="input-field text-lg"
+                    className="input-field text-base"
                     autoFocus
                   />
                 )}
@@ -433,8 +433,8 @@ export default function Home() {
                     placeholder={currentQuestion.placeholder}
                     value={formData[currentQuestion.id as keyof FormData] || ''}
                     onChange={(e) => setFormData({ ...formData, [currentQuestion.id]: e.target.value })}
-                    rows={6}
-                    className="input-field resize-none text-lg"
+                    rows={5}
+                    className="input-field resize-none text-base"
                     autoFocus
                   />
                 )}
@@ -442,19 +442,19 @@ export default function Home() {
             </AnimatePresence>
 
             {/* Navigation Buttons */}
-            <div className="flex justify-between mt-10 pt-8 border-t border-gray-200 dark:border-gray-700 relative z-10">
+            <div className="flex justify-between mt-8 pt-6 border-t border-gray-200 dark:border-gray-700 relative z-10">
               <motion.button
                 whileHover={{ scale: currentStep === 0 ? 1 : 1.05 }}
                 whileTap={{ scale: currentStep === 0 ? 1 : 0.95 }}
                 onClick={handleBack}
                 disabled={currentStep === 0}
-                className={`flex items-center gap-2 px-6 py-4 rounded-xl font-bold transition-all duration-200 ${
+                className={`flex items-center gap-2 px-5 py-3 rounded-xl font-bold transition-all duration-200 text-sm ${
                   currentStep === 0
                     ? 'text-gray-400 cursor-not-allowed bg-gray-100 dark:bg-gray-800'
-                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 shadow-md hover:shadow-lg'
+                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 shadow-sm hover:shadow-md'
                 }`}
               >
-                <ChevronLeft className="w-5 h-5" />
+                <ChevronLeft className="w-4 h-4" />
                 Back
               </motion.button>
 
@@ -463,7 +463,7 @@ export default function Home() {
                 whileTap={{ scale: !isStepValid() || isSubmitting ? 1 : 0.95 }}
                 onClick={handleNext}
                 disabled={!isStepValid() || isSubmitting}
-                className={`flex items-center gap-3 px-8 py-4 rounded-2xl font-bold transition-all duration-300 relative overflow-hidden ${
+                className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all duration-300 relative overflow-hidden text-sm ${
                   !isStepValid() || isSubmitting
                     ? 'bg-gray-300 dark:bg-gray-700 text-gray-500 cursor-not-allowed'
                     : 'btn-primary'
@@ -475,20 +475,20 @@ export default function Home() {
                       animate={{ rotate: 360 }}
                       transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                     >
-                      <Sparkles className="w-5 h-5" />
+                      <Sparkles className="w-4 h-4" />
                     </motion.div>
-                    Finding Perfect Gifts...
+                    Finding Gifts...
                   </>
                 ) : currentStep === questions.length - 1 ? (
                   <>
-                    <Sparkles className="w-5 h-5" />
+                    <Sparkles className="w-4 h-4" />
                     Find Perfect Gifts
-                    <Check className="w-5 h-5" />
+                    <Check className="w-4 h-4" />
                   </>
                 ) : (
                   <>
                     Continue
-                    <ChevronRight className="w-5 h-5" />
+                    <ChevronRight className="w-4 h-4" />
                   </>
                 )}
               </motion.button>
@@ -500,7 +500,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="mt-8 text-center text-sm text-gray-500 dark:text-gray-400"
+            className="mt-6 text-center text-sm text-gray-500 dark:text-gray-400"
           >
             <p className="flex items-center justify-center gap-2">
               <Shield className="w-4 h-4" />
@@ -512,4 +512,3 @@ export default function Home() {
     </>
   );
 }
-
