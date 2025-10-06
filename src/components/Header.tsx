@@ -41,6 +41,7 @@ const Header = () => {
   const navLinks = [
     { href: '/', label: 'Find Gifts' },
     { href: '/top-gifts', label: 'Top Gifts' },
+  //  { href: '/wishlist', label: 'Wish List' },
     { href: '/blogs', label: 'Blogs' },
     { href: '/about', label: 'About' },
   ];
