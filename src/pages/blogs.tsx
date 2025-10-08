@@ -87,10 +87,6 @@ export default function Blogs() {
                     </div>
                   </div>
                   <div className="flex items-center gap-8 ml-6">
-                    <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
-                      <Heart className="w-5 h-5 fill-rose-500 text-rose-500" />
-                      <span className="font-semibold">{list.likes}</span>
-                    </div>
                     <svg className="w-6 h-6 text-indigo-600 dark:text-indigo-400 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>

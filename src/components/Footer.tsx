@@ -59,7 +59,7 @@ const Footer = () => {
             <h3 className="font-bold text-gray-900 dark:text-white mb-4">Get in Touch</h3>
             <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 mb-4">
               <Mail className="w-4 h-4" />
-              <span>contact@giftideas.com</span>
+              <span>contact@giftadvisor.com</span>
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-400">
               Have questions? We'd love to hear from you!
@@ -71,7 +71,7 @@ const Footer = () => {
         <div className="pt-8 border-t border-gray-200 dark:border-gray-800">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-gray-600 dark:text-gray-400 text-center md:text-left">
-              &copy; {currentYear} Gift Ideas. All rights reserved. Made with{' '}
+              &copy; {currentYear} GiftAdvisor. All rights reserved. Made with{' '}
               <Heart className="w-4 h-4 inline text-red-500 fill-red-500" /> for gift givers
             </p>
             <p className="text-xs text-gray-500 dark:text-gray-500 text-center md:text-right max-w-md">
