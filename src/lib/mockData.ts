@@ -55,45 +55,44 @@ export const giftCategories = [
 export const popularLists = [
   {
     rank: 1,
+    title: 'Adorable Gifts for Your Girlfriend Under $6',
+    slug: 'girlfriend-under-6',
+    description: 'Thoughtful doesn\'t mean expensive — perfect budget gifts',
+    likes: '1.2k',
+  },
+  {
+    rank: 2,
     title: 'Top 10 Gifts for Your Girlfriend',
     slug: 'girlfriend',
     description: 'Show her you care with these thoughtful picks',
     likes: '2.4k',
   },
   {
-    rank: 2,
+    rank: 3,
     title: 'Top 100 Most Liked Gifts of 2025',
     slug: 'most-liked-2025',
     description: 'The ultimate collection of crowd favorites',
     likes: '5.1k',
   },
   {
-    rank: 3,
+    rank: 4,
     title: 'Top 5 Luxury Gifts Under $100',
     slug: 'luxury-under-100',
     description: 'Premium gifts that won\'t break the bank',
     likes: '1.8k',
   },
   {
-    rank: 4,
+    rank: 5,
     title: 'Top 15 Unique Gifts for Him',
     slug: 'unique-for-him',
     description: 'Stand out with these one-of-a-kind ideas',
     likes: '3.2k',
   },
   {
-    rank: 5,
+    rank: 6,
     title: 'Top 20 Last-Minute Gift Ideas',
     slug: 'last-minute',
     description: 'Quick delivery, maximum impact',
     likes: '2.9k',
-  },
-  // NEW ENTRY in popular lists
-  {
-    rank: 6,
-    title: 'Adorable Gifts for Your Girlfriend Under $6',
-    slug: 'girlfriend-under-6',
-    description: 'Thoughtful doesn\'t mean expensive — perfect budget gifts',
-    likes: '1.2k',
-  },
+  }
 ];
