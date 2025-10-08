@@ -147,22 +147,28 @@ export default function Home() {
               className="text-center mb-12"
             >
               <motion.div
-                animate={{ 
-                  rotate: [0, 10, -10, 0],
-                  scale: [1, 1.1, 1]
-                }}
-                transition={{ 
-                  duration: 3,
-                  repeat: Infinity,
-                  repeatType: "reverse"
-                }}
-                className="inline-block mb-6"
-              >
-                <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-3xl flex items-center justify-center shadow-2xl shadow-purple-500/50 relative">
-                  <Gift className="w-9 h-9 text-white" />
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400 blur-xl opacity-50 animate-pulse"></div>
-                </div>
-              </motion.div>
+  animate={{ 
+    y: [0, -10, 0],  // Floating up and down
+    rotate: [0, 5, -5, 0],  // Gentle rotation
+  }}
+  transition={{ 
+    duration: 4,
+    repeat: Infinity,
+    repeatType: "reverse",
+    ease: "easeInOut"
+  }}
+  className="inline-block mb-6 relative"
+>
+  {/* Glow effect behind logo */}
+  <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-3xl blur-2xl opacity-40 animate-pulse"></div>
+  
+  {/* Your logo image */}
+  <img 
+    src="/logo_image.png" 
+    alt="GiftAdvisor Logo" 
+    className="w-24 h-24 md:w-28 md:h-28 object-contain relative z-10 drop-shadow-2xl"
+  />
+</motion.div>
               
               <h1 className="text-4xl md:text-5xl font-black mb-4 leading-tight">
                 <span className="gradient-text">Find the Perfect Gift</span>

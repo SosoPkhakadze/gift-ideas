@@ -15,11 +15,13 @@ const Footer = () => {
           {/* Brand Section */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
-                <Gift className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-black gradient-text">Gift Ideas</span>
-            </div>
+  <img 
+    src="/logo_image.png" 
+    alt="GiftAdvisor Logo" 
+    className="w-10 h-10 object-contain"
+  />
+  <span className="text-xl font-black gradient-text">GiftAdvisor</span>
+</div>
             <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
               AI-powered gift recommendations to help you find the perfect present for every occasion.
             </p>

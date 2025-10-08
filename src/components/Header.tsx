@@ -55,21 +55,25 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <motion.div
-              whileHover={{ rotate: 12, scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="relative"
-            >
-              <div className="w-9 h-9 md:w-10 md:h-10 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-2xl group-hover:shadow-purple-500/50 transition-all duration-300">
-                <Gift className="w-4 h-4 md:w-5 md:h-5 text-white" />
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400 rounded-xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
-            </motion.div>
-            <span className="text-xl md:text-2xl font-black gradient-text">
-              Gift Ideas
-            </span>
-          </Link>
+          <Link href="/" className="flex items-center gap-2 group">
+  <motion.div
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    className="relative"
+  >
+    {/* Your custom logo image */}
+    <img 
+      src="/logo_image.png" 
+      alt="GiftAdvisor Logo" 
+      className="w-8 h-8 md:w-10 md:h-10 object-contain group-hover:drop-shadow-2xl transition-all duration-300"
+    />
+    {/* Optional: Add glow effect behind logo */}
+    <div className="absolute inset-0 bg-gradient-to-br from-indigo-400 via-purple-400 to-pink-400 rounded-xl blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
+  </motion.div>
+  <span className="text-xl md:text-2xl font-black gradient-text">
+    GiftAdvisor
+  </span>
+</Link>
           
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
