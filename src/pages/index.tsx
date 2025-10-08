@@ -157,16 +157,16 @@ export default function Home() {
     repeatType: "reverse",
     ease: "easeInOut"
   }}
-  className="inline-block mb-6 relative"
+  className="inline-block relative -mt-20" 
 >
   {/* Glow effect behind logo */}
-  <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-3xl blur-2xl opacity-40 animate-pulse"></div>
+  <div className="absolute inset-0 bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-full blur-2xl opacity-40 animate-pulse"></div> {/* Changed rounded-3xl to rounded-full */}
   
   {/* Your logo image */}
   <img 
     src="/logo_image.png" 
     alt="GiftAdvisor Logo" 
-    className="w-24 h-24 md:w-28 md:h-28 object-contain relative z-10 drop-shadow-2xl"
+    className="w-64 h-64 md:w-72 md:h-72 object-contain relative z-10 drop-shadow-2xl"
   />
 </motion.div>
               
