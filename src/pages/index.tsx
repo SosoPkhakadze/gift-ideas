@@ -42,8 +42,8 @@ const questions = [
     id: 'occasion',
     question: 'What\'s the occasion?',
     subtitle: 'Special moments deserve special gifts',
-    type: 'select',
-    options: ['Birthday', 'Anniversary', 'Wedding', 'Christmas', 'Valentine\'s Day', 'Graduation', 'Thank You', 'Just Because'],
+    type: 'select-or-custom',
+    options: ['Birthday', 'Anniversary', 'Wedding', 'Christmas', 'Valentine\'s Day', 'Graduation', 'Thank You', 'Just Because', 'Other'],
   },
   {
     id: 'interests',
